@@ -1,0 +1,135 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- <style>
+        body  {
+            background-image: url("paper.gif");
+            background-color: #cccccc   ;
+          }
+    </style> -->
+    <style>
+        body  {
+            background-image: url("paper.gif");
+            background-color: rgb(208, 179, 179);   ;
+          }
+    </style>
+</head>
+
+<body>
+<!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Create Order In Shopify</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Create Order</p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Checkout Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5">
+            <div class="col-lg-8">
+                <div class="mb-4">
+                    <h4 class="font-weight-semi-bold mb-4">Create Order</h4>
+                    {% if msg %}
+                    <b style="color: rgb(94, 94, 165)">{{msg}}</b>
+                    {%endif%}
+                    <form action="{% url 'create_order_in_shopify' %}" method="post">
+                        {% csrf_token %}
+                            <div class="col-md-6 form-group">
+                                Quality : <select class="" name="quality" id="quality">
+                                    <option value="1">1</option>
+                                    <option value="2">2</option> 
+                                    <option value="3">3</option> 
+                                    <option value="4">4</option> 
+                                    <option value="5">5</option> 
+
+                                </select>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Name</label>
+                                <input class="form-control" type="text" placeholder="Enter Full Name" id="name" name="name">
+                                <span id="email_error"></span>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>email </label>
+                                <input class="form-control" type="email" placeholder="Enter email" id="email" name="email">
+                            </div><div class="col-md-6 form-group">
+                                <label>Address </label>
+                                <input class="form-control" type="text" placeholder="Enter Full Address" id="address" name="address">
+                                <span id="email_error"></span>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Phone </label>
+                                <input class="form-control" type="number" placeholder="Enter Phone Number" id="phone" name="phone">
+                                <span id="email_error"></span>
+                            </div>
+                            <div> 
+                                <button id="create_order" class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-2">Click Here</button>
+                            </div>
+                            <!-- <div class="card-footer border-secondary bg-transparent"> 
+                                <a href="{% url 'forgot-Password' %}" style="color: black; font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif; font-style: italic;">Forgot Password</a>
+                            </div>   -->                        
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Checkout End -->
+
+    <!-- <script>
+        document.getElementById('create_order').addEventListener('click', function(e){
+            e.preventDefault(); // prevent form submission if any
+
+            const quality = document.getElementById('quality').value;
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const address = document.getElementById('address').value;
+            const phone = document.getElementById('phone').value;
+
+            fetch('/create_order_in_shopify/',{
+                method : 'Post',
+                headers:{
+                    'Content-Type' : 'application/json',
+                    'X-CSRFToken': '{{ csrf_token }}'
+                },
+                body : JSON.stringify({
+                    quality : quality,
+                    name : name,
+                    email : email,
+                    address : address,
+                    phone : phone
+                }),
+            })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP error! Status: ${response.status}`);
+                    }
+                return response.json();
+            })
+
+            .then(data => {
+                if (data.message){
+                    alert(data.message);
+                }
+                else if(data.error){
+                    alert("error: " + data.error);
+                }
+            })
+            .catch(error => {
+                alert("Something went wrong! Check console for details.");
+                console.error('Error:', error);            
+            });
+        });
+    </script> -->
+</body>
+</html>
+{% endblock%}

@@ -1,0 +1,64 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <style>
+        body  {
+            background-image: url("paper.gif");
+            background-color: rgb(208, 179, 179);   ;
+          }
+    </style>
+</head>
+
+<body>
+<!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Verify OTP</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Verify OTP</p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Checkout Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5">
+            <div class="col-lg-8">
+                <div class="mb-4">
+                    <h4 class="font-weight-semi-bold mb-4">Verify OTP</h4>
+                    {% if msg %}
+                    <b style="color: blue">{{msg}}</b>
+                    {%endif%}
+                    <form action="{% url 'verify-otp' %}" method="post">
+                        {% csrf_token %}
+                            <div class="col-md-6 form-group">                                
+                                <input class="form-control" type="hidden" name="email" value="{{email}}">
+                            </div>
+                            <div class="col-md-6 form-group">                                
+                                <input class="form-control" type="hidden" name="otp" value="{{otp}}">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>OTP</label>
+                                <input class="form-control" type="number" placeholder="Enter OTP" name="uotp">
+                            </div>
+                            <div class="card-footer border-secondary bg-transparent"> 
+                                <button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-2">Verify OTP</button>
+                            </div>
+                                                                 
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Checkout End -->
+
+</body>
+</html>
+{% endblock%}

@@ -1,0 +1,77 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- <style>
+        body  {
+            background-image: url("paper.gif");
+            background-color: #cccccc   ;
+          }
+    </style> -->
+    <style>
+        body  {
+            background-image: url("paper.gif");
+            background-color: rgb(208, 179, 179);   ;
+          }
+    </style>
+</head>
+<body>
+<!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Update Shopify Product Data</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Login</p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+    <!-- Checkout Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5">
+            <div class="col-lg-8">
+                <div class="mb-4">
+                    <h4 class="font-weight-semi-bold mb-4">UPDATE DATA FROM SHOPIFY</h4>
+                    {% if msg %}
+                        <b style="color: blue">{{msg}}</b>
+                    {%endif%}                   
+                    {% if context %}
+                        <b style="color: blue">product_id = {{context.product_id}}</b>
+                    {%endif%} 
+                    <form action="{% url 'update_shopify_product_data' context.product_id %}" method="post">
+                        <!-- Fallback to # (which means “stay on the same page”) otherwise -->
+                        <!-- <b style="color: rgb(50, 50, 117)">{{context}}</b> -->
+                        {% csrf_token %}
+                            <div class="col-md-6 form-group">
+                                <label>ID</label>
+                                <input class="form-control" type="number" placeholder="Enter Product Id" name="id" value="{{context.product_id}}" readonly>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Title</label>
+                                <input class="form-control" type="text" placeholder="Enter Product Title" name="title" value="{{context.title}}">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Product Price</label>
+                                <input class="form-control" type="number" placeholder="Enter Product Price" name="price" value="{{context.price}}">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Product Vendor</label>
+                                <input class="form-control" type="text" placeholder="Enter Product Vendor" name="vendor" value="{{context.vendor}}">
+                            </div>
+                            <div> 
+                                <button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-2">UPDATE DATA</button>
+                            </div>                                     
+                    </form>                 
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Checkout End -->
+</body>
+</html>
+{% endblock%}

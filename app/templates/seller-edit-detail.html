@@ -1,0 +1,115 @@
+{% extends 'seller-header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+
+<body>
+<!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Edit Product</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Edit Product</p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Checkout Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5">
+            <div class="col-lg-8">
+                <div class="mb-4">
+                    <h4 class="font-weight-semi-bold mb-4">Edit Product</h4>
+                    {% if msg %}
+                    <b style="color: blue">{{msg}}</b>
+                    {%endif%}
+                    <form action="{% url 'seller-edit-product' pk=product.pk %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="col-md-6 form-group">
+                            <img src="{{product.product_image.url}}" width="300px" height="400px">
+                        </div>
+                        
+                        <div class="">
+                            <select class="" name="product_category">
+                                {% if product.product_category == "Men" %}
+                                <option>--Select Category--</option>
+                                <option value="Men" selected>Men</option>
+                                <option value="Women">Women</option>
+                                <option value="Kids">Kids</option>
+                                <option value="Accessories">Accessories</option>
+                                <option value="Shoes">Shoes</option>
+                                {% elif product.product_category == "Women" %}
+                                    <option>--Select Category--</option>
+                                    <option value="Men">Men</option>
+                                    <option value="Women"selected>Women</option>
+                                    <option value="Kids">Kids</option>
+                                    <option value="Accessories">Accessories</option>
+                                    <option value="Shoes">Shoes</option>
+                                {% elif product.product_category == "Kids" %}
+                                    <option>--Select Category--</option>
+                                    <option value="Men">Men</option>
+                                    <option value="Women">Women</option>
+                                    <option value="Kids" selected>Kids</option>
+                                    <option value="Accessories">Accessories</option>
+                                    <option value="Shoes">Shoes</option>
+                                {% elif product.product_category == "Accessories" %}
+                                    <option>--Select Category--</option>
+                                    <option value="Men">Men</option>
+                                    <option value="Women">Women</option>
+                                    <option value="Kids">Kids</option>
+                                    <option value="Accessories" selected>Accessories</option>
+                                    <option value="Shoes">Shoes</option>
+                                {% elif product.product_category == "Shoes" %}
+                                    <option>--Select Category--</option>
+                                    <option value="Men">Men</option>
+                                    <option value="Women">Women</option>
+                                    <option value="Kids">Kids</option>
+                                    <option value="Accessories">Accessories</option>
+                                    <option value="Shoes" selected>Shoes</option>
+                                {% endif %}
+                            </select>
+                        </div>
+                        <br>
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label>Product Name</label>
+                                <input class="form-control" type="text" placeholder="Enter Product Name" name="product_name" value="{{product.product_name}}">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Product_price</label>
+                                <input class="form-control" type="number" placeholder="Enter Product_price" name="product_price" value="{{product.product_price}}">
+                            </div>
+                            
+                            <div class="col-md-6 form-group">
+                                <label>Product Describtion </label>
+                                <input class="form-control" type="text" placeholder="Enter Product Describtion" name="product_desc" value="{{product.product_desc}}"> 
+                            </div>
+                            
+                            <div class="col-md-6 form-group">
+                                <label>Product Image</label><br>
+                                <input class="form-control" type="file" name="product_image" value="{{product.product_image}}">
+                            </div>
+                            
+                            <div class="card-footer border-secondary bg-transparent"> 
+                                <button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3" type="submit">Update Product</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Checkout End -->
+
+</body>
+
+</html>
+{% endblock%}

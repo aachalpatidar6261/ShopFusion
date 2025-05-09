@@ -1,0 +1,85 @@
+{% extends 'seller-header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+</head>
+
+<body>
+<!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Profile</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Profile</p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Checkout Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5">
+            <div class="col-lg-8">
+                <div class="mb-4">
+                    <h4 class="font-weight-semi-bold mb-4">Update Profile </h4>
+                    {% if msg %}
+                    <b style="color: blue">{{msg}}</b>
+                    {%endif%}
+                    <form action="{% url 'profile' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="col-md-6 form-group">
+                            <img src="{{request.session.profile}}" width="200px" height="200px">
+                        </div><br>
+                        <div class="row">
+                           
+                            <div class="col-md-6 form-group">
+                                <label>First Name</label>
+                                <input class="form-control" type="text" placeholder="Enter First Name" name="fname" value="{{user.fname}}">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Last Name</label>
+                                <input class="form-control" type="text" placeholder="Enter Last Name" name="lname" value="{{user.lname}}">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>E-mail</label>
+                                <input class="form-control" type="email" placeholder="Enter Email" name="email" value="{{user.email}}" readonly>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Mobile No</label>
+                                <input class="form-control" type="number" placeholder="Enter Mobile" name="mobile" value="{{user.mobile}}">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Address Line 1</label>
+                                <input class="form-control" type="text" placeholder="Enter Address" name="address" value="{{user.address}}"> 
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>ZIP Code</label>
+                                <input class="form-control" type="number" placeholder="Enter Zip Code" name="zipcode" value="{{user.zipcode}}">
+                            </div>
+                            
+                            <div class="col-md-6 form-group">
+                                <label>Profile</label>
+                                <input class="form-control" type="file" name="profile" >
+                            </div>
+                            
+                            <div class="card-footer border-secondary bg-transparent"> 
+                                <button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Update Profile</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Checkout End -->
+
+</body>
+
+</html>
+{% endblock%}

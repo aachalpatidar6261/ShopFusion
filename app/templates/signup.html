@@ -1,0 +1,132 @@
+ {% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- <style>
+        body  {
+            background-image: url("paper.gif");
+            background-color: #cccccc   ;
+          }
+    </style> -->
+    <style>
+        body  {
+            background-image: url("paper.gif");
+            background-color: rgb(208, 179, 179);   ;
+          }
+    </style>
+</head>
+
+<body>
+<!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 300px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Sign Up</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Sign Up</p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+
+    <!-- Checkout Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5">
+            <div class="col-lg-8">
+                <div class="mb-4">
+                    <h4 class="font-weight-semi-bold mb-4">Register Now</h4>
+                    {% if msg %}
+                    <b style="color: blue">{{msg}}</b>
+                    {%endif%}
+                    <form action="{% url 'signup' %}" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        <div class="">
+                            <select class="" name="usertype">
+                                <option>-----Sellect User Type-----</option>
+                                <option value="buyer">Buyer</option>
+                                <option value="seller">Seller</option>
+                            </select>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-6 form-group">
+                                <label>First Name</label>
+                                <input class="form-control" type="text" placeholder="Enter First Name" name="fname">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Last Name</label>
+                                <input class="form-control" type="text" placeholder="Enter Last Name" name="lname">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>E-mail</label>
+                                <input class="form-control" type="email" placeholder="Enter Email" id="email" name="email">
+                                <span id="email_error"></span>
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Mobile No</label>
+                                <input class="form-control" type="number" placeholder="Enter Mobile" name="mobile">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Address Line 1</label>
+                                <input class="form-control" type="text" placeholder="Enter Address" name="address"> 
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>ZIP Code</label>
+                                <input class="form-control" type="number" placeholder="Enter Zip Code" name="zipcode">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Password</label>
+                                <input class="form-control" type="password" placeholder="Enter Password" name="password">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Confirm Password</label>
+                                <input class="form-control" type="password" placeholder="Enter Confirm Password" name="cpassword">
+                            </div>
+                            <div class="col-md-6 form-group">
+                                <label>Profile</label>
+                                <input class="form-control" type="file" name="profile" >
+                            </div>                            
+                            <div class="card-footer border-secondary bg-transparent"> 
+                                <button class="btn btn-lg btn-block btn-primary font-weight-bold my-3 py-3">Sign Up</button>
+                            </div>
+
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Checkout End -->
+    <script>
+        $("#email").change(function()
+                                    {
+                                     var email=$(this).val();
+                                     $.ajax
+                                     ({
+                                        url: '/ajax/validate-email',
+                                        data:{
+                                                'email':email
+                                            },
+                                        dataType: 'json',
+                                        success: function(data)                                   
+                                        {
+                                            if (data.is_taken)
+                                            {
+                                             document.getElementById("email_error").innerHTML="This Email is Already Registered";
+                                            }
+                                            else
+                                            {
+                                              document.getElementById("email_error").innerHTML="";
+                                            }
+                                        }
+                                     });                              
+                                    });
+      
+      </script>
+      
+</body>
+</html>
+{% endblock%}

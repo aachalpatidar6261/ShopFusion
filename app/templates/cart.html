@@ -1,0 +1,142 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <script src="https://js.stripe.com/v3/"></script>
+    <!-- <style>
+        body  {
+            background-image: url("paper.gif");
+            background-color: #cccccc   ;
+          }
+    </style> -->
+    <style>
+        body  {
+            background-image: url("paper.gif");
+            background-color: rgb(208, 179, 179);   ;
+          }
+    </style>
+</head>
+<body>
+    <!-- user for later {unique idea } -->
+
+    <!-- Offer Start --><!--
+    <div class="container-fluid offer pt-5">
+        <div class="row px-xl-5">
+            <div class="col-md-6 pb-4">
+                <div class="position-relative bg-secondary text-center text-md-right text-white mb-2 py-5 px-5">
+                    <img src="{% static 'img/offer-1.png' %}" alt="">
+                    <div class="position-relative" style="z-index: 1;">
+                        <h5 class="text-uppercase text-primary mb-3">20% off the all order</h5>
+                        <h1 class="mb-4 font-weight-semi-bold">Spring Collection</h1>
+                        <a href="" class="btn btn-outline-primary py-md-2 px-md-3">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 pb-4">
+                <div class="position-relative bg-secondary text-center text-md-left text-white mb-2 py-5 px-5">
+                    <img src="{% static 'img/offer-2.png' %}" alt="">
+                    <div class="position-relative" style="z-index: 1;">
+                        <h5 class="text-uppercase text-primary mb-3">20% off the all order</h5>
+                        <h1 class="mb-4 font-weight-semi-bold">Winter Collection</h1>
+                        <a href="" class="btn btn-outline-primary py-md-2 px-md-3">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- Offer End -->
+
+     <!-- Featured Start -->
+    
+    <!-- Featured End -->
+
+
+    
+    <!-- Products Start -->
+    <div class="container-fluid pt-5">
+        <div class="text-center mb-4">
+            {% if cart %}
+            <h2 class="section-title px-5"><span class="px-2">Total Products {{cart.count}}</span></h2>
+            {% else %}
+            <h2 class="section-title px-5"><span class="px-2">NO Product In cart</span></h2>
+            {% endif %}
+        </div>  
+         <br><br>
+        <div class="row px-xl-5 pb-3">
+            {%for i in cart %}  
+            <div class="col-lg-3 col-md-6 col-sm-12 pb-1">               
+                <div class="card product-item border-0 mb-4">
+                    <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                        <img src="{{i.product.product_image.url}}" class="img-fluid w-100"  alt="{{i.product.product_name}}" >
+                    </div>
+                    <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                        <h6 class="text-truncate mb-3">{{i.product.product_name}}</h6>
+                        <div class="d-flex justify-content-center">
+                            <h6>Price: {{i.product.product_price}}</h6><h6 class="text-muted ml-2"><del></del></h6><br>
+                            <form name="qty" method="post" action="{% url 'change-qty' %}">
+                                {% csrf_token %}
+                                <input type="hidden" name="pk" value="{{i.pk}}">
+                                <h6>QTY : <input type="number" name=product_qty value="{{i.product_qty}}" min="1" max="10" onchange="this.form.submit();"> </h6>
+                            </form> <br>
+                            <h6>Total: {{i.total_price}}</h6><h6 class="text-muted ml-2"><del></del></h6>
+                        </div>
+                    </div>
+                    <div class="card-footer d-flex justify-content-between bg-light border">
+                        <a href="{% url 'view-detail' pk=i.product.pk %}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
+                    </div>               
+                </div> 
+                <br><br>              
+            </div>
+                       
+            {%endfor%}
+        </div>
+        <div class="card-footer d-flex justify-content-between bg-light border">
+        <h4 style="color: 	lightpink">Net Price : {{net_price}}</h4>
+        </div>
+        <form method="post">
+            <input type="hidden" id="net_price" name="net_price" value="{{net_price}}">
+            <button type="button" class="btn btn-lg btn-primary" id="checkout-button">Checkout</button>
+        </form>
+
+       
+    </div>
+    <!-- Products End -->   
+     <script type="text/javascript">
+              var stripe = Stripe('pk_test_51NdrRaSFrpNPRRx9e6CabgkSHhz0V8oZvNwxE7diw4jiIwfwn19Wiz5i65CDh1t8tIbhf5AhLfz7tBlgWUcdrb6W00LYoI2MpE');
+              var checkoutButton = document.getElementById('checkout-button');
+          
+              checkoutButton.addEventListener('click', function() { 
+                  fetch('/create-checkout-session/', {
+                  method: 'POST',
+                  headers:{
+                      'Accept': 'application/json',
+                      'X-Requested-With': 'XMLHttpRequest',
+                  },
+                  body: JSON.stringify({'post_data':'{{net_price}}'}) //  <!-- stringfly convert in string -->
+              })
+           .then(function(response) {
+           return response.json();
+           })
+           .then(function(session) {
+           return stripe.redirectToCheckout({ sessionId: session.id });
+           })
+           .then(function(result) {
+           // If `redirectToCheckout` fails due to a browser or network
+           // error, you should display the localized error message to your
+           // customer using `error.message`.
+           if (result.error) {
+           alert(result.error.message);
+           }
+           })
+           .catch(function(error) {
+           console.error('Error:', error);
+           });
+           });
+           </script>
+
+</body>
+
+</html>
+{% endblock %}

@@ -1,0 +1,140 @@
+{% extends 'header.html' %}
+{% load static %}
+{% block content %}
+<!DOCTYPE html>
+<html lang="en">
+<head>    
+    <!-- <style>
+        body  {
+            background-image: url("paper.gif");
+            background-color: #cccccc   ;
+          }
+    </style> -->
+    <style>
+        body  {
+            background-image: url("paper.gif");
+            background-color: rgb(208, 179, 179);   ;
+          }
+    </style>
+</head>
+<body>
+    
+    <!-- Page Header Start -->
+    <div class="container-fluid bg-secondary mb-5">
+        <div class="d-flex flex-column align-items-center justify-content-center" style="min-height: 200px">
+            <h1 class="font-weight-semi-bold text-uppercase mb-3">Shop Now</h1>
+            <div class="d-inline-flex">
+                <p class="m-0"><a href="/">Home</a></p>
+                <p class="m-0 px-2">-</p>
+                <p class="m-0">Shop</p>
+            </div>
+        </div>
+    </div>
+    <!-- Page Header End -->
+
+     <!-- Offer Start -->
+     <div class="container-fluid offer pt-3">
+        <div class="row px-xl-5">
+            <div class="col-md-6 pb-4">
+                <div class="position-relative bg-secondary text-center text-md-right text-white mb-2 py-5 px-5">
+                    <img src="{% static 'img/offer-1.png' %}" alt="">
+                    <div class="position-relative" style="z-index: 1;">
+                        <h5 class="text-uppercase text-primary mb-3">20% off the all order</h5>
+                        <h1 class="mb-4 font-weight-semi-bold">Spring Collection</h1>
+                        <a href="" class="btn btn-outline-primary py-md-2 px-md-3">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6 pb-4">
+                <div class="position-relative bg-secondary text-center text-md-left text-white mb-2 py-5 px-5">
+                    <img src="{% static 'img/offer-2.png' %}" alt="">
+                    <div class="position-relative" style="z-index: 1;">
+                        <h5 class="text-uppercase text-primary mb-3">20% off the all order</h5>
+                        <h1 class="mb-4 font-weight-semi-bold">Winter Collection</h1>
+                        <a href="" class="btn btn-outline-primary py-md-2 px-md-3">Shop Now</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+    <!-- Offer End
+
+
+    <!-- Shop Start -->
+    <div class="container-fluid pt-5">
+        <div class="row px-xl-5">            
+            <!-- Shop Sidebar Start -->
+            <div class="col-lg-3 col-md-12">        
+                     
+                <!-- Price Start -->
+                <div class="border-bottom mb-4 pb-4">
+                    <h5 class="font-weight-semi-bold mb-4">Filter by Categories</h5>                    
+                    <form>             
+                                
+                        <ul>
+                            <li><a href="{% url 'women' %}">Women</a></li>
+                        </ul>  
+                        <ul>
+                            <li><a href="{% url 'men' %}">Men</a></li>
+                        </ul>         
+                        <ul>
+                            <li><a href="{% url 'kids' %}">Kids</a></li>
+                        </ul>  
+                        <ul>
+                            <li><a href="{% url 'accesseries' %}">Accesseries</a></li>
+                        </ul>         
+                        <ul>
+                            <li><a href="{% url 'shoes' %}">shoes</a></li>
+                        </ul>  
+                        <ul>
+                            <li><a href="{% url 'Goggles' %}">Goggles</a></li>
+                        </ul>  
+                        <ul>
+                            <li><a href="{% url 'Makeup' %}">Makeup</a></li>
+                        </ul>  
+                        <ul>
+                            <li><a href="{% url 'Party Bulb' %}">Party Bulb</a></li>
+                        </ul>  
+                        <ul>
+                            <li><a href="{% url 'Furniture' %}">Furniture</a></li>
+                        </ul>  
+                        <ul>
+                            <li><a href="{% url 'Kitchen tools' %}">Kitchen tools</a></li>
+                        </ul>   
+                    </form>                    
+                </div>
+                
+            </div>
+                
+                
+            <!-- Shop Product Start -->
+            <div class="col-lg-9 col-md-12">               
+                <div class="row pb-3">                    
+                    {% for i in products %} 
+                    <div class="col-lg-4 col-md-6 col-sm-12 pb-1">                                          
+                        <div class="card product-item border-0 mb-4">                           
+                            <div class="card-header product-img position-relative overflow-hidden bg-transparent border p-0">
+                                <img class="img-fluid w-100" src="{{i.product_image.url}}" alt="" style="max-width:300px; max-height:400px; min-width:300px; min-height:400px;">
+                            </div>
+                            <div class="card-body border-left border-right text-center p-0 pt-4 pb-3">
+                                <h6 class="text-truncate mb-3">{{i.product_name}}</h6>
+                                <div class="d-flex justify-content-center">
+                                    <h6 class="text-muted ml-2">{{i.product_price}}</h6>
+                                </div>
+                            </div>
+                            <div class="card-footer d-flex justify-content-between bg-light border">
+                                <a href="{% url 'view-detail' pk=i.pk %}" class="btn btn-sm text-dark p-0"><i class="fas fa-eye text-primary mr-1"></i>View Detail</a>
+                            </div>                            
+                        </div>                       
+                    </div>  
+                    {% endfor %}                             
+                </div>
+            </div>
+            <!-- Shop Product End -->
+        </div>
+    </div>
+    <!-- Shop End -->
+
+</body>
+</html>
+{%endblock%}

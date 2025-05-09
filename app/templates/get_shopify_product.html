@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <h1>List Shopify Products</h1>
+    {% if products %}
+        {% for product_data in products %}            
+        <li>
+        <strong>Product Name : {{ product_data.title }}</strong><br>
+        Product Id : {{ product_data.id }}<br>
+        Product Price : ₹{{ product_data.variants.0.price }}<br>
+        Product Vendor : {{ product_data.vendor }}<br>    
+        <button type="submit"><a href="{% url 'update_shopify_product_data' product_data.id%}">UPDATE</a></button>
+        <button type="submit"><a href="{% url 'delete_shopify_product' product_data.id%}">DELETE</a></button>
+        </li>            
+        <hr><hr>
+        {% endfor %}
+    {% endif %}
+</body>
+</html> 
