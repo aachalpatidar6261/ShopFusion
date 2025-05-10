@@ -32,7 +32,7 @@
         <div class="row align-items-center py-3 px-xl-5">
             <div class="col-lg-3 d-none d-lg-block">
                 <a href="" class="text-decoration-none">
-                    <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1">E</span>Shopper</h1>
+                    <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1"><b style="color: rgb(143, 95, 95);">E</b></span>Shopper</h1>
                 </a>
             </div>
             <div class="col-lg-6 col-6 text-left">
@@ -48,7 +48,7 @@
                 </form>
             </div>
             <div class="col-lg-3 col-6 text-right">
-                    <a href="{% url 'logout' %}" class="fa fa-sign-out">Logout</a>                    
+                    <a style="color: rgb(143, 95, 95); font-size: large;" href="{% url 'logout' %}" class="fa fa-sign-out">Logout</a>                    
                 </a>
             </div>
         </div>
@@ -68,7 +68,7 @@
                         <span class="navbar-toggler-icon"></span>
                     </button>
                     <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
-                        <div class="navbar-nav mr-auto py-0">
+                        <div class="navbar-nav mr-auto py-0">                            
                             <a href="{% url 'seller-index' %}" class="nav-item nav-link active">Home</a>
                             <a href="{% url 'seller-add-product' %}" class="nav-item nav-link">Add Product</a>
                             <a href="{% url 'seller-view-product' %}" class="nav-item nav-link">View Product</a>

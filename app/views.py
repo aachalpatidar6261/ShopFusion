@@ -116,6 +116,8 @@ def contact(request):
     else:
         return render(request,'contact.html')
 
+
+
 def signup(request):
     if request.method=="POST":
         try:

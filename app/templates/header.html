@@ -35,11 +35,11 @@
             <div class="row align-items-center py-3 px-xl-5">
                 <div class="col-lg-3 d-none d-lg-block">
                     <a href="{% url 'index' %}" class="text-decoration-none">
-                        <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1"><span style="color: white;">E</span></span>Shopper</h1>
+                        <h1 class="m-0 display-5 font-weight-semi-bold"><span class="text-primary font-weight-bold border px-3 mr-1"><span style="color: rgb(96, 64, 64);">E</span></span>Shopper</h1>
                     </a>
                 </div>
-                <div style="margin-left: 110px; color: rgb(92, 44, 44);"><b>𝓕𝓲𝓷𝓭 𝓹𝓮𝓻𝓼𝓹𝓮𝓬𝓽𝓲𝓿𝓮 𝓪𝓷𝓭 𝓬𝓵𝓪𝓻𝓲𝓽𝔂 , 𝓯𝓲𝓷𝓭 𝔂𝓸𝓾𝓻𝓼𝓮𝓵𝓯....</b></div>
-                <h5 style="margin-left: 100px; color: white;">e.shopper@example.com</h5>
+                <div style="margin-left: 50px; color: rgb(96, 64, 64);"><b>𝓕𝓲𝓷𝓭 𝓹𝓮𝓻𝓼𝓹𝓮𝓬𝓽𝓲𝓿𝓮 𝓪𝓷𝓭 𝓬𝓵𝓪𝓻𝓲𝓽𝔂 , 𝓯𝓲𝓷𝓭 𝔂𝓸𝓾𝓻𝓼𝓮𝓵𝓯....</b>       </div>
+                <!-- <h5 style="margin-left: 100px; color: white;">e.shopper@example.com</h5> -->
                 <!-- <div class="col-lg-6 col-6 text-left">
                     <form action="">
                         <div class="input-group">   rgb(172, 119, 119);
@@ -64,6 +64,9 @@
                     </a>
                 </div>
                 {%endif %}
+                <div  style="margin-left:px;">
+                     <a href="{% url 'logout' %}" class="nav-item nav-link"><b style="color: rgb(96, 64, 64); font-size: large;">Logout</b></a>
+                </div>
             </div>
         </div>
     </div>
@@ -92,7 +95,7 @@
                         <div class="navbar-nav ml-auto py-0">
                             {% if request.session.email %}
                             <a href="{% url 'change-password' %}" class="nav-item nav-link">Change Password</a>
-                            <a href="{% url 'logout' %}" class="nav-item nav-link">Logout</a>
+                           
                             <a href="{% url 'profile' %}" class="nav-item nav-link">Profile</a>
                             {% else %}                            
                             <a href="{% url 'login' %}" class="nav-item nav-link">Login</a>
